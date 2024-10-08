@@ -1,0 +1,32 @@
+{
+    "name": "Python Dev Container",
+    "image": "mcr.microsoft.com/devcontainers/python:3",  // Specifies the base image (Python 3)
+
+    // Use "customizations" for VS Code-specific settings
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.pythonPath": "/usr/local/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",  // VS Code Python extension
+                "ms-toolsai.jupyter" // Jupyter notebook extension (optional)
+            ]
+        }
+    },
+
+    "postCreateCommand": "git config --global user.name 'Ahmed Almasah' && git config --global user.email 'ahmed.s.almasah@gmail.com' && pip install -r requirements.txt", // Install required libraries after the container is created
+    
+    // Enable SSH agent forwarding
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "/ssh-agent"
+    },
+
+    "mounts": [
+        "source=${localWorkspaceFolder}/requirements.txt,target=/workspace/requirements.txt,type=bind"
+    ],
+
+    "forwardPorts": [5000],  // Forward any necessary ports
+
+    "remoteUser": "vscode"   // Default user inside the container
+}
