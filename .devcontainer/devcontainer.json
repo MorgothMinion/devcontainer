@@ -17,12 +17,8 @@
 
     "postCreateCommand": "git config --global user.name 'Ahmed Almasah' && git config --global user.email 'ahmed.s.almasah@gmail.com' && pip install -r requirements.txt", // Install required libraries after the container is created
     
-    // Enable SSH agent forwarding
-    "remoteEnv": {
-        "SSH_AUTH_SOCK": "/ssh-agent"
-    },
-
     "mounts": [
+        "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind",
         "source=${localWorkspaceFolder}/requirements.txt,target=/workspace/requirements.txt,type=bind"
     ],
 
